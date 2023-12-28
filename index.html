@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Building Energy Prediction</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Building Energy Prediction</h1>
+        <form method="post" action="{{ url_for('predict') }}">
+            <label for="surface_area">Surface Area:(sq meter)</label>
+            <input type="number" step="any" name="surface_area" required>
+
+            <label for="roof_area">Roof Area:(sq meter)</label>
+            <input type="number" step="any" name="roof_area" required>
+
+            <label for="overall_height">Overall Height:(sq meter)</label>
+            <input type="number" step="any" name="overall_height" required>
+
+            <label for="glazing_area">Glazing Area:(sq meter)</label>
+            <input type="number" step="any" name="glazing_area" required>
+
+            <label for="glazing_area_distribution">Glazing Area Distribution:(percentage)</label>
+            <input type="number" name="glazing_area_distribution" required>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if heating_load is defined and cooling_load is defined %}
+            <h2>Predicted Results:</h2>
+            <p>Heating Load: {{ heating_load }}</p>
+            <p>Cooling Load: {{ cooling_load }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
